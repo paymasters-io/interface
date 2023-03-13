@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const EmailForm = ({
   reason,
@@ -18,6 +18,17 @@ const EmailForm = ({
     updateSubmit({ email });
     setSubmitted(true);
   };
+
+  useEffect(() => {
+    if (submitted) {
+      setEmail("");
+      const timer = setTimeout(() => {
+        setSubmitted(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [submitted]);
 
   return (
     <form onSubmit={handleSubmit} className={`newsletter-form ${className}`}>
@@ -39,7 +50,7 @@ const EmailForm = ({
             required
           />
         </div>
-        <button className="cta">
+        <button disabled={submitted} className="cta">
           {reason === "subscribe" ? "Subscribe" : "Join Waitlist"}
         </button>
       </div>
