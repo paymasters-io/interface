@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, getByTestId, render, screen } from "@testing-library/react";
 import HeroSection from "@/components/SiteSectionsModule/HeroSection";
 
 describe("HeroSection", () => {
@@ -24,7 +24,7 @@ describe("HeroSection", () => {
     render(<HeroSection />);
 
     const paragraph = screen.getByText(
-      /We provide a full suite of services to help you manage your paymasters and their access to your systems./i
+      /Using paymasters to simplify zk transactions and provide superior UX to dapps./i
     );
 
     expect(paragraph).toBeInTheDocument();
@@ -41,8 +41,8 @@ describe("HeroSection", () => {
   // });
 
   test("renders the waitlist form and handles submit", () => {
-    const { getByLabelText, getByRole } = render(<HeroSection />);
-    const emailInput = getByLabelText("Email");
+    const { getByTestId, getByRole } = render(<HeroSection />);
+    const emailInput = getByTestId("email");
     const submitButton = getByRole("button", { name: "Join Waitlist" });
     fireEvent.change(emailInput, { target: { value: "test@example.com" } });
     fireEvent.click(submitButton);
