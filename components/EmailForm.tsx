@@ -4,10 +4,12 @@ const EmailForm = ({
   reason,
   updateSubmit,
   className,
+  name,
 }: {
   reason: string;
   updateSubmit: (value: object) => void;
   className?: string;
+  name?: string;
 }) => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -31,7 +33,12 @@ const EmailForm = ({
   }, [submitted]);
 
   return (
-    <form onSubmit={handleSubmit} className={`newsletter-form ${className}`}>
+    <form
+      onSubmit={handleSubmit}
+      className={`newsletter-form ${className}`}
+      role="form"
+      aria-label={name || "newsletter form"}
+    >
       <div className="form-header">
         {reason === "subscribe"
           ? "Subscribe to our news letter"

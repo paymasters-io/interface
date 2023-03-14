@@ -1,12 +1,25 @@
 import Head from "next/head";
-import Image from "next/image";
-
-import styles from "@/pages/index.module.css";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import DefaultLayout from "layouts/Default";
 import HeroSection from "@/components/SiteSectionsModule/HeroSection";
+import RebatesMiddleWareSection from "@/components/SiteSectionsModule/RebatesMiddleWareSection";
+import FeaturesSection from "@/components/SiteSectionsModule/FeaturesSection";
+import BuildSection from "@/components/SiteSectionsModule/BuildSection";
+import PartnersSection from "@/components/SiteSectionsModule/PartnersSection";
+import CTASection from "@/components/SiteSectionsModule/CTASection";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
+  const [showSections, setShowSections] = useState(false);
+
+  useEffect(() => {
+    // show sections if the route query is set to true
+    if (router.query.showSections === "true") {
+      setShowSections(true);
+    }
+  }, [router.query.showSections]);
+
   return (
     <>
       <Head>
@@ -44,6 +57,17 @@ export default function Home() {
       </Head>
       <main className="site-main">
         <HeroSection />
+        {showSections && (
+          <>
+            <RebatesMiddleWareSection />
+            <FeaturesSection />
+            <div className="section-group">
+              <BuildSection />
+            </div>
+            <PartnersSection />
+            <CTASection />
+          </>
+        )}
       </main>
     </>
   );

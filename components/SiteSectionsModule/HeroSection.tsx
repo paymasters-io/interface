@@ -9,7 +9,11 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="hero-section site-section" role="region">
+    <section
+      className="hero-section site-section"
+      role="region"
+      aria-label="hero section"
+    >
       <div className="wrapper w-image">
         <div className="hero-content section-content">
           <h1 className="font-semibold text-5xl">
@@ -22,7 +26,12 @@ const HeroSection = () => {
           {/* <Link href="/">
             <button className="cta">Launch App</button>
           </Link> */}
-          <EmailForm className="max-w-md" reason="waitlist" updateSubmit={handleUpdateWaitlist} />
+          <EmailForm
+            className="waitlist-form max-w-md"
+            reason="waitlist"
+            updateSubmit={handleUpdateWaitlist}
+            name="waitlist form"
+          />
         </div>
         <div className="hero-img-cont section-img-cont">
           <Image src={heroIllustration} alt="Paymaster Hero Illustration" />

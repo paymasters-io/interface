@@ -55,7 +55,7 @@ body {
 }
 
 .form-group .cta {
-  @apply  flex items-center;
+  @apply flex items-center;
 }
 
 .site-header {
@@ -295,7 +295,8 @@ body {
   @apply flex flex-wrap items-start justify-between gap-12 !py-12;
 }
 
-.newsletter-form {
+.newsletter-form,
+.waitlist-form {
   @apply flex flex-col gap-4;
 }
 

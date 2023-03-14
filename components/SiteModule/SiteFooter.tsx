@@ -3,7 +3,10 @@ import SiteLogo from "./SiteLogo";
 
 const SiteFooter = () => {
   return (
-    <footer className="site-footer site-section">
+    <footer
+      className="site-footer site-section"
+      aria-label="site footer"
+    >
       <div className="wrapper">
         <section className="logo-form-section">
           <SiteLogo />
