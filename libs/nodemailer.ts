@@ -300,7 +300,7 @@ const genHtml = (email: string, name?: string) => `
                                             "
                                           >
                                             <a
-                                              href="https://www.google.com/url?q=https://paymasters.io&amp;source=gmail-html&amp;ust=1682100958481000&amp;usg=AOvVaw1xajCEMUwf6ppAFo00Cqpq"
+                                              href="https://paymasters.io"
                                               style="
                                                 text-decoration: underline;
                                                 color: #555555;
@@ -377,18 +377,13 @@ const genHtml = (email: string, name?: string) => `
                     class="m_img-container m_center m_autowidth"
                     style="padding-right: 0px; padding-left: 0px"
                   >
-                    <a
-                      href="https://www.google.com/url?q=https://goo.gl/sDhD5J&amp;source=gmail-html&amp;ust=1682100958481000&amp;usg=AOvVaw3LAcGYmLhw1J4yWfxJcPTG"
-                      title="https://www.enginemailer.com/?utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=ff_footer"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
+
                       <img
                         class="m_center m_autowidth"
                         align="center"
                         border="0"
+                        src="https://www.paymasters.io/_next/static/media/paymaster-logo.fa7bd2ed.svg"
                         alt="Image"
-                        title="https://www.enginemailer.com/?utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=ff_footer"
                         style="
                           outline: none;
                           text-decoration: none;
@@ -402,7 +397,6 @@ const genHtml = (email: string, name?: string) => `
                         "
                         width="168"
                       />
-                    </a>
                   </div>
                 </div>
               </div>
