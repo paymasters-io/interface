@@ -378,25 +378,16 @@ const genHtml = (email: string, name?: string) => `
                     style="padding-right: 0px; padding-left: 0px"
                   >
 
-                      <img
-                        class="m_center m_autowidth"
-                        align="center"
-                        border="0"
-                        src="https://www.paymasters.io/_next/static/media/paymaster-logo.fa7bd2ed.svg"
-                        alt="Image"
-                        style="
-                          outline: none;
-                          text-decoration: none;
-                          clear: both;
-                          display: block !important;
-                          border: 0;
-                          height: auto;
-                          float: none;
-                          width: 100%;
-                          max-width: 168px;
-                        "
-                        width="168"
-                      />
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="31" viewBox="0 0 22 31" fill="none">
+                  <path d="M10.2722 30.2983L0 23.0847L10.2722 18.6445V30.2983Z" fill="url(#paint0_linear_49_662)"/>
+                  <path d="M0 0.552216H10.0734C16.2955 0.552216 21.3396 5.59629 21.3396 11.8185C21.3396 18.0407 16.2955 23.0847 10.0734 23.0847H0V0.552216Z" fill="#7D0CC1"/>
+                  <defs>
+                  <linearGradient id="paint0_linear_49_662" x1="12.3266" y1="21.2291" x2="11.8627" y2="33.3569" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#B3B3B3"/>
+                  <stop offset="0.35901" stop-color="white"/>
+                  </linearGradient>
+                  </defs>
+                  </svg>
                   </div>
                 </div>
               </div>
