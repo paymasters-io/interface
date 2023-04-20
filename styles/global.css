@@ -34,7 +34,9 @@ body {
   @apply w-6 h-6 text-white;
 }
 
-.form-input[type="text"] {
+.form-input[type="text"],
+.form-input[type="email"],
+.form-input[type="password"] {
   @apply w-full p-3 px-4 bg-paymasters-dark text-white bg-black/30 border border-paymasters-dark-50 rounded-md;
   border-style: solid;
   border-image: linear-gradient(
@@ -150,7 +152,7 @@ body {
 
 .hero-section {
   /* @apply min-h-fit h-[calc(100vh-4rem)]; */
-  @apply md:py-20 lg:py-32;
+  @apply md:py-12 lg:py-24;
 }
 
 .hero-section > .wrapper {
