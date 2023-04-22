@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { usePolybase } from "@polybase/react";
 
 const EmailForm = ({
   reason,
@@ -18,6 +19,8 @@ const EmailForm = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const polybase = usePolybase();
+
   const resetForm = () => {
     setEmail("");
     setVisitorName("");
@@ -28,29 +31,10 @@ const EmailForm = ({
   };
 
   const handleAddToWaitlist = async (data: { name: string; email: string }) => {
-    try {
-      const res = await fetch("/api/addToWaitlist", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      const json = await res.json();
-
-      if (!res.ok) throw Error(json.message);
-
-      console.log(json);
-
-      return json;
-    } catch (error: any) {
-      console.log({
-        error,
-      });
-
-      throw Error(error.message);
-    }
+    const res = await polybase
+      .collection<{ name: string; email: string }>("WaitList")
+      .create([data.name, data.email]);
+    return res.data;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -62,6 +46,7 @@ const EmailForm = ({
       } else {
         try {
           setLoading(true);
+
           const submitData = await handleAddToWaitlist({
             name: visitorName,
             email,
@@ -70,10 +55,11 @@ const EmailForm = ({
           updateSubmit(submitData);
           setLoading(false);
           setSubmitted(true);
-        } catch (error: any) {
+        } catch (error: unknown) {
           console.log({ error });
-
-          setError("Something went wrong, please try again later");
+          (error as Error).message == "record id already exists in collection"
+            ? setError("User already joined the waitlist.")
+            : setError("Something went wrong, please try again later");
           setLoading(false);
           setTimeout(() => {
             resetForm();
@@ -109,53 +95,60 @@ const EmailForm = ({
       role="form"
       aria-label={name || "newsletter form"}
     >
-      <div className="form-header">
+      <div className="form-header text-left">
         {reason === "subscribe"
           ? "Subscribe to our news letter"
-          : "Enter your email to get join the waitlist"}
+          : nameStepActive && !submitted
+          ? "Enter your Name"
+          : "Enter your email to join the waitlist"}
       </div>
       <div className="form-group">
         {!submitted ? (
-          <>
-            <div className="form-control">
-              {!nameStepActive ? (
-                <input
-                  id="email"
-                  data-testid="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="form-input"
-                  type="email"
-                  placeholder="Enter your Email"
-                  required
-                />
-              ) : (
-                <input
-                  id="name"
-                  data-testid="name"
-                  value={visitorName}
-                  onChange={(e) => setVisitorName(e.target.value)}
-                  className="form-input"
-                  type="text"
-                  placeholder="Enter your Name"
-                  required
-                />
-              )}
-              {error && <span className="text-red">{error}</span>}
+          <div className="m-auto space-y-4">
+            <div className=" inline-flex gap-4">
+              <div className="form-control">
+                {!nameStepActive ? (
+                  <input
+                    id="email"
+                    data-testid="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="form-input"
+                    type="email"
+                    placeholder="Enter your Email"
+                    required
+                  />
+                ) : (
+                  <input
+                    id="name"
+                    data-testid="name"
+                    value={visitorName}
+                    onChange={(e) => setVisitorName(e.target.value)}
+                    className="form-input"
+                    type="text"
+                    placeholder="Enter your Name"
+                    required
+                  />
+                )}
+              </div>
+              <button
+                type="submit"
+                disabled={loading || submitted}
+                className={`cta ${nameStepActive ? "main" : "alt"}`}
+              >
+                {!submitted
+                  ? !loading
+                    ? reason === "subscribe"
+                      ? "Subscribe"
+                      : nameStepActive
+                      ? "Join Waitlist"
+                      : "Next"
+                    : "..."
+                  : "Submitted"}
+              </button>
             </div>
-            <button
-              disabled={loading || submitted}
-              className={`cta ${nameStepActive ? "" : "alt"}`}
-            >
-              {!submitted
-                ? !loading
-                  ? reason === "subscribe"
-                    ? "Subscribe"
-                    : "Join Waitlist"
-                  : "..."
-                : "Submitted"}
-            </button>
-          </>
+            <div>{error && <span className="text-red">{error}</span>}</div>
+          </div>
         ) : (
           <span className="text-green-400">Success!</span>
         )}

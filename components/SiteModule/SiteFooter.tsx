@@ -25,28 +25,28 @@ const SiteFooter = () => {
           </form>
         </section>
         <section className="links-section">
-          <p className="copy">Ⓒ 2023 Paymasters. All rights reserved</p>
+          <p className="copy">Ⓒ {(new Date().getFullYear())} Paymasters. All rights reserved</p>
           <div className="links">
             <ul className="socials links-list">
               <li className="link-item">
                 <a href="#">Discord</a>
               </li>
               <li className="link-item">
-                <a href="#">Telegram</a>
+                <a href="https://t.me/paymasters_io">Telegram</a>
               </li>
               <li className="link-item">
-                <a href="#">Twitter</a>
+                <a href="https://twitter.com/paymasters_io">Twitter</a>
               </li>
               <li className="link-item">
-                <a href="#">GitHub</a>
+                <a href="https://github.com/paymasters-io">GitHub</a>
               </li>
             </ul>
             <ul className="site links-list">
               <li className="link-item">
-                <Link href="/dev">Contact</Link>
+                <Link href="mailto:hello@paymasters.io, ross@paymasters.io">Contact</Link>
               </li>
               <li className="link-item">
-                <Link href="/dev">Privacy</Link>
+                <Link href="https://docs.paymasters.io/privacy">Privacy</Link>
               </li>
             </ul>
           </div>
