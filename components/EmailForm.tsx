@@ -13,8 +13,6 @@ const EmailForm = ({
   name?: string;
 }) => {
   const [email, setEmail] = useState("");
-  const [visitorName, setVisitorName] = useState("");
-  const [nameStepActive, setNameStepActive] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -23,56 +21,47 @@ const EmailForm = ({
 
   const resetForm = () => {
     setEmail("");
-    setVisitorName("");
-    setNameStepActive(false);
     setSubmitted(false);
     setLoading(false);
     setError("");
   };
 
-  const handleAddToWaitlist = async (data: { name: string; email: string }) => {
+  const handleAddToWaitlist = async (email: string) => {
     const res = await polybase
-      .collection<{ name: string; email: string }>("WaitList")
-      .create([data.name, data.email]);
+      .collection<{ email: string }>("WaitList")
+      .create([email]);
     return res.data;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (reason === "waitlist") {
-      if (!nameStepActive) {
-        setNameStepActive(true);
-        return;
-      } else {
-        try {
-          setLoading(true);
+      try {
+        setLoading(true);
 
-          const submitData = await handleAddToWaitlist({
-            name: visitorName,
-            email,
-          });
+        const submitData = await handleAddToWaitlist(email);
 
-          updateSubmit(submitData);
-          setLoading(false);
-          setSubmitted(true);
-        } catch (error: unknown) {
-          console.log({ error });
-          (error as Error).message == "record id already exists in collection"
-            ? setError("User already joined the waitlist.")
-            : setError("Something went wrong, please try again later");
-          setLoading(false);
-          setTimeout(() => {
-            resetForm();
-          }, 3000);
-
+        updateSubmit(submitData);
+        setLoading(false);
+        setSubmitted(true);
+      } catch (error: unknown) {
+        console.log({ error });
+        if (
+          (error as Error).message !== "record id already exists in collection"
+        ) {
+          setError("Something went wrong, please try again later");
           return;
         }
-        return;
+        setLoading(false);
+        setTimeout(() => {
+          resetForm();
+        }, 3000);
       }
+      window.open(
+        "https://app.deform.cc/form/4c204027-c44b-4cce-bb5c-5b108e8e5318",
+        "_blank"
+      );
     }
-
-    updateSubmit({ email });
-    setSubmitted(true);
   };
 
   useEffect(() => {
@@ -98,8 +87,6 @@ const EmailForm = ({
       <div className="form-header text-left">
         {reason === "subscribe"
           ? "Subscribe to our news letter"
-          : nameStepActive && !submitted
-          ? "Enter your Name"
           : "Enter your email to join the waitlist"}
       </div>
       <div className="form-group">
@@ -107,47 +94,32 @@ const EmailForm = ({
           <div className="m-auto space-y-4">
             <div className=" inline-flex gap-4">
               <div className="form-control">
-                {!nameStepActive ? (
-                  <input
-                    id="email"
-                    data-testid="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="form-input"
-                    type="email"
-                    placeholder="Enter your Email"
-                    required
-                  />
-                ) : (
-                  <input
-                    id="name"
-                    data-testid="name"
-                    value={visitorName}
-                    onChange={(e) => setVisitorName(e.target.value)}
-                    className="form-input"
-                    type="text"
-                    placeholder="Enter your Name"
-                    required
-                  />
-                )}
+                <input
+                  id="email"
+                  data-testid="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="form-input"
+                  type="email"
+                  placeholder="Enter your Email"
+                  required
+                />
               </div>
               <button
                 type="submit"
                 disabled={loading || submitted}
-                className={`cta ${nameStepActive ? "main" : "alt"}`}
+                className="cta alt"
               >
                 {!submitted
                   ? !loading
                     ? reason === "subscribe"
                       ? "Subscribe"
-                      : nameStepActive
-                      ? "Join Waitlist"
-                      : "Next"
+                      : "Join Waitlist"
                     : "..."
                   : "Submitted"}
               </button>
             </div>
-            <div>{error && <span className="text-red">{error}</span>}</div>
+            <div>{error && <span className="text-red-400">{error}</span>}</div>
           </div>
         ) : (
           <span className="text-green-400">Success!</span>
