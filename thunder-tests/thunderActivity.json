@@ -1,0 +1,35 @@
+[
+  {
+    "_id": "4eec63af-fef0-428b-aa8b-cd10370d26c5",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/api/getEmails",
+    "url": "http://localhost:3000/api/getEmails",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-20T17:38:42.720Z",
+    "modified": "2023-04-20T17:38:42.720Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "640fc691-96a9-4f6f-b63c-e31b6ccd8084",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/api/addToWaitlist",
+    "url": "http://localhost:3000/api/addToWaitlist",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-04-20T17:51:49.249Z",
+    "modified": "2023-04-25T10:32:33.341Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"miracleficient@gmail.com\",\n  \"name\": \"Jake Doe\"\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]
