@@ -35,15 +35,38 @@ const EmailForm = ({
     return res.data;
   };
 
+  const handleSendEmail = async (email: string) => {
+    console.log("handleSendEmail ====>", {
+      email,
+    });
+
+    try {
+      const res = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      return res.json();
+    } catch (error) {
+      console.log({ error });
+
+      return error;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (reason === "waitlist") {
       try {
         setLoading(true);
 
+        const sendEmail = await handleSendEmail(email);
         const submitData = await handleAddToWaitlist(email);
 
-        updateSubmit(submitData);
+        updateSubmit({ submitData, sendEmail });
         setLoading(false);
         setSubmitted(true);
       } catch (error: unknown) {

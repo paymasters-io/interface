@@ -116,7 +116,7 @@ const genHtml = (email: string, name?: string) => `
                               style="
                                 font-weight: 400;
                                 text-align: left;
-                                padding-top: 40px;
+                                padding: 40px;
                                 vertical-align: top;
                                 border-top: 0;
                                 border-right: 0;
@@ -163,8 +163,7 @@ const genHtml = (email: string, name?: string) => `
                                           >
                                             <span style="font-size: 30px"
                                               ><strong
-                                                >Congrats! You've been added to
-                                                the waitlist</strong
+                                                >Congrats! Thanks for your interest!</strong
                                               ></span
                                             >
                                           </p>
@@ -206,6 +205,7 @@ const genHtml = (email: string, name?: string) => `
                                         >
                                           <p
                                             style="
+                                              color: white;
                                               margin: 0;
                                               font-size: 14px;
                                               text-align: center;
@@ -215,7 +215,7 @@ const genHtml = (email: string, name?: string) => `
                                               >Hey ${
                                                 name ? name : email
                                               }, thanks for signing
-                                              up to the wait list.</span
+                                              up to the wait list. As soon as you complete the <a target="_blank" rel="noopener noreferrer" href="https://app.deform.cc/form/4c204027-c44b-4cce-bb5c-5b108e8e5318/" style="color: white;">interest list form</a>, you'll be added to the waitlist.</span
                                             >
                                           </p>
                                         </div>

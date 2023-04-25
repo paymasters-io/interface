@@ -18,16 +18,16 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/api/addToWaitlist",
-    "url": "http://localhost:3000/api/addToWaitlist",
+    "url": "http://localhost:3000/api/sendEmail",
     "method": "POST",
     "sortNum": 0,
     "created": "2023-04-20T17:51:49.249Z",
-    "modified": "2023-04-25T10:32:33.341Z",
+    "modified": "2023-04-25T14:53:38.204Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"miracleficient@gmail.com\",\n  \"name\": \"Jake Doe\"\n}",
+      "raw": "{\n  \"email\": \".com\",\n  \"name\": \"Jake Doe\"\n}",
       "form": []
     },
     "tests": []
