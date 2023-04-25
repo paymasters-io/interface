@@ -15,8 +15,17 @@ body {
 }
 
 .cta.alt {
-  @apply border border-white bg-transparent text-white;
+  @apply border border-paymasters-dark-50 bg-transparent text-white rounded-md;
+  border-image: linear-gradient(
+      234.49deg,
+      rgba(255, 255, 255, 0) -0.82%,
+      rgba(255, 255, 255, 1) 39.83%,
+      rgba(255, 255, 255, 0) 93.51%
+    )
+    1;
 }
+
+.cta.main {}
 
 .cta.none {
   @apply bg-transparent !p-0;
@@ -102,7 +111,7 @@ body {
 }
 
 .site-nav .nav-item {
-  @apply text-3xl;
+  @apply text-3xl font-bold;
   @apply lg:text-base;
 }
 
@@ -150,6 +159,10 @@ body {
   @apply blur-[18rem];
 }
 
+.hero-img-cont {
+  @apply pb-10
+}
+
 .hero-section {
   /* @apply min-h-fit h-[calc(100vh-4rem)]; */
   @apply md:py-12 lg:py-24;
@@ -160,7 +173,7 @@ body {
 }
 
 .hero-section .hero-content {
-  @apply z-10;
+  @apply z-10 text-center md:text-left;
 }
 
 .features-section {
@@ -299,7 +312,7 @@ body {
 
 .newsletter-form,
 .waitlist-form {
-  @apply flex flex-col gap-4;
+  @apply flex flex-col gap-4 mt-5;
 }
 
 .site-footer .links-section {
