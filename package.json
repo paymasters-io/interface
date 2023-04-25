@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.16",
+    "@polybase/auth": "^0.5.0",
+    "@polybase/react": "^0.5.0",
     "@prisma/client": "^4.13.0",
     "next": "latest",
     "nodemailer": "^6.9.1",

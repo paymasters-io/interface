@@ -1,6 +1,5 @@
 import { sendMail } from "libs/nodemailer";
 import type { NextApiRequest, NextApiResponse } from "next";
-import prisma from "prisma/prisma";
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,19 +8,6 @@ export default async function handler(
   try {
     const { email, name } = req.body;
 
-    // Add email to waitlist
-    await prisma.$connect();
-
-    const resp = await prisma.emails.create({
-      data: {
-        address: email,
-        name,
-      },
-    });
-
-    await prisma.$disconnect();
-
-    // send email to user
     const data = await sendMail({
       email,
       subject: "Welcome to the waitlist",

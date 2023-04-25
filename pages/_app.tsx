@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import DefaultLayout from "layouts/Default";
 import { ReactElement, ReactNode } from "react";
 import { NextPage } from "next";
+import PolybaseReactProvider from "./providers/Polybase";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -18,5 +19,9 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page) => page);
   // Component.getLayout || ((page) => <DefaultLayout>{page}</DefaultLayout>);
 
-  return getLayout(<Component {...pageProps} />);
+  return (
+    <PolybaseReactProvider>
+      {getLayout(<Component {...pageProps} />)}
+    </PolybaseReactProvider>
+  );
 }

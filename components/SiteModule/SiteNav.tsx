@@ -16,11 +16,11 @@ const SiteNav = () => {
         <div className="wrapper">
           <ul className="nav-list">
             <li className="nav-item">
-              <Link href="/dev">Docs</Link>
+              <Link href="https://docs.paymasters.io">Docs</Link>
             </li>
             <li className="nav-item">
-              <Link href="/">
-                <button className="cta">Launch App</button>
+              <Link href="https://app.paymasters.io">
+                <button className="cta" disabled>coming soon</button>
               </Link>
             </li>
           </ul>
